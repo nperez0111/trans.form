@@ -5,7 +5,7 @@ test( 'transform function', t => {
     let x = {
         a: 2
     }
-    t.deepEqual( x[ transform ]( {
+    t.deepEqual( x[ transform.now ]( {
         a: 'b'
     } ), {
         b: 2

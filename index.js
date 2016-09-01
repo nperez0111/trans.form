@@ -58,5 +58,6 @@ const isObj = function ( maybe ) {
 
 module.exports = {
     toString: () => trans.form,
-    save: trans.save
+    save: trans.save,
+    now: trans.form
 }
