@@ -1,6 +1,27 @@
 import test from 'ava';
-import fn from './';
+const transform = require( './' );
 
-test('title', t => {
-	t.is(fn('unicorns'), 'unicorns & rainbows');
-});
+test( 'transform function', t => {
+    let x = {
+        a: 2
+    }
+    t.deepEqual( x[ transform ]( {
+        a: 'b'
+    } ), {
+        b: 2
+    } );
+} );
+
+test( 'transform.save function', t => {
+    let y = {
+        a: 2
+    }
+    t.deepEqual( y[ transform.save ]( {
+        a: 'b'
+    } ), {
+        b: 2
+    } )
+    t.deepEqual( y, {
+        b: 2
+    } )
+} )

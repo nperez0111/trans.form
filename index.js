@@ -3,6 +3,21 @@
 const isObj = function ( maybe ) {
         return maybe === Object( maybe )
     },
+    rmDiff = function ( that, obj ) {
+
+        Object.keys( that ).forEach( function ( cur ) {
+
+            if ( !obj.hasOwnProperty( cur ) ) {
+
+                delete that[ cur ]
+
+            }
+
+        } )
+
+        return obj
+
+    },
     addDiff = function ( that, obj ) {
 
         Object.keys( obj ).forEach( function ( cur ) {
@@ -34,7 +49,8 @@ const isObj = function ( maybe ) {
         },
         save: function ( getCurrentObject, transformerObject ) {
 
-            addDiff( this, manip( transformerObject, getCurrentObject() ) )
+            addDiff( this, rmDiff( this, manip( transformerObject, getCurrentObject() ) ) )
+
             return this
 
         }
