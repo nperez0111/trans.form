@@ -1,4 +1,4 @@
-# trans-form [![Build Status](https://travis-ci.org/nperez0111/trans-form.svg?branch=master)](https://travis-ci.org/nperez0111/trans-form)
+# trans-form [![Build Status](https://travis-ci.org/nperez0111/trans.form.svg?branch=master)](https://travis-ci.org/nperez0111/trans.form)
 
 > A Wrapper around object-manip to be used on any object to allow transformations.
 
@@ -13,10 +13,16 @@ $ npm install --save trans-form
 ## Usage
 
 ```js
-const transForm = require('trans-form');
-
-transForm('unicorns');
-//=> 'unicorns & rainbows'
+const transform = require('trans-form');
+let x = {
+	a: 2
+}
+x[ transform ]( {
+	a: function(x){
+    	return x + 2;
+    }
+} )
+//=> { a: 4 }
 ```
 
 

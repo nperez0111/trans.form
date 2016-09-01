@@ -1,41 +1,44 @@
 'use strict';
 
-const trans = require( "objextender" )( {
-    form: function ( getCurrentObject, transformerObject ) {
-
-        return require( 'object-manip' )( transformerObject, getCurrentObject() )
-
+const isObj = function ( maybe ) {
+        return maybe === Object( maybe )
     },
-    save: function ( getCurrentObject, transformerObject ) {
+    addDiff = function ( that, obj ) {
 
-        let addDiff = function ( that, obj ) {
+        Object.keys( obj ).forEach( function ( cur ) {
 
-            Object.keys( obj ).forEach( function ( cur ) {
+            if ( isObj( obj[ cur ] ) ) {
 
-                if ( ( obj[ cur ] ) === Object( obj[ cur ] ) ) {
+                if ( !that.hasOwnProperty( cur ) || !isObj( that[ cur ] ) ) {
 
-                    if ( !that.hasOwnProperty( cur ) || !isObj( that[ cur ] ) ) {
-
-                        that[ cur ] = {};
-                    }
-
-                    addDiff( that[ cur ], obj[ cur ] )
-
-                } else {
-
-                    that[ cur ] = obj[ cur ];
-
+                    that[ cur ] = {};
                 }
 
-            } )
+                addDiff( that[ cur ], obj[ cur ] )
+
+            } else {
+
+                that[ cur ] = obj[ cur ];
+
+            }
+
+        } )
+
+    },
+    manip = require( 'object-manip' ),
+    trans = require( 'objextender' )( {
+        form: function ( getCurrentObject, transformerObject ) {
+
+            return manip( transformerObject, getCurrentObject() )
+
+        },
+        save: function ( getCurrentObject, transformerObject ) {
+
+            addDiff( this, manip( transformerObject, getCurrentObject() ) )
+            return this
 
         }
-
-        addDiff.call( this, this, require( 'object-manip' )( transformerObject, getCurrentObject() ) )
-
-        return this
-    }
-} )
+    } )
 
 module.exports = {
     toString: () => trans.form,
