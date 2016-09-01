@@ -1,6 +1,6 @@
 {
     "name": "trans.form",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A Wrapper around object-manip to be used on any object to allow transformations.",
     "license": "MIT",
     "repository": "nperez0111/trans-form",
