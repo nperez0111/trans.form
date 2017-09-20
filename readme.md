@@ -2,7 +2,7 @@
 
 > A Wrapper around [object-manip](https://github.com/nperez0111/object-manip) to be used on any object to allow transformations.
 
-To see why this is _safe or not safe_ refer to [my library](https://github.com/nperez0111/objExtender#is-this-safe)
+To see why this is _safe or not safe_ refer to [my library](https://github.com/nperez0111/objExtension#is-this-even-safe)
 
 
 ## Install
